@@ -39,12 +39,14 @@ namespace SlickBiking.DAO
               decimal price = reader.GetDecimal(2);
               int qoh = reader.GetInt32(3);
               string type = reader.GetString(4);
+              string model = reader.GetString(5);
               Bike bike = new Bike();
               bike.Description = description;
               bike.Id = id;
               bike.Price = price;
               bike.Qoh = qoh;
               bike.BikeType = type;
+              bike.Model = model;
 
               bikeList.Add(bike);
             }
@@ -151,6 +153,50 @@ namespace SlickBiking.DAO
       }
     }
 
+
+    public Bike getBikeById(int? bikeId)
+    {
+      using (con = new SqlConnection(connectionString))
+      {
+        Bike bike = new Bike();
+        try
+        {
+          con.Open();
+          SqlCommand command = new SqlCommand();
+          command.Connection = con;
+          command.CommandText = "SELECT * FROM bikes WHERE id = @id";
+          command.Parameters.AddWithValue("@id", bikeId);
+          SqlDataReader reader = command.ExecuteReader();
+          if (reader.HasRows)
+          {
+            while (reader.Read())
+            {
+              int id = reader.GetInt32(0);
+              string description = reader.GetString(1);
+              decimal price = reader.GetDecimal(2);
+              int qoh = reader.GetInt32(3);
+              string type = reader.GetString(4);
+              string model = reader.GetString(5);
+              bike.Description = description;
+              bike.Id = id;
+              bike.Price = price;
+              bike.Qoh = qoh;
+              bike.BikeType = type;
+              bike.Model = model;
+            }
+          }
+        }
+        catch (Exception e)
+        {
+          throw e;
+        }
+        finally
+        {
+          con.Close();
+        }
+        return bike;
+      }
+    }
 
 
   }
