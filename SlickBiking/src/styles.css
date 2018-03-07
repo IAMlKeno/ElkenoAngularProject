@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: purple;
+}
+
+.newBikeTable {
+  margin: auto;
+}
+
+.newBikeTable td {
+  padding: 2px;
+}
+
+.newBikeBtnDiv {
+  display: inline-block;
+  float: right;
+}
+
+.newBikeFormTitle {
+  display: inline-block;
+}
+
+.slickBikeHeader {
+  text-align: center;
+}
+
+.modalBtn {
+  position: relative;
+  top: -5px;
+}

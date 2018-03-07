@@ -1,14 +1,14 @@
 <div ng-app="bikeApp">
-  <div class="jumbotron" style="text-align: center">
+  <div class="jumbotron slickBikeHeader">
     <img src="../assets/images/slickbikeslogo.png" />
   </div>
 
-  <div class="col-md-8" style="margin:auto" ng-app="bikeDisplayTable" ng-controller="BikeDisplayController">
+  <div class="col-md-12" ng-app="bikeDisplayTable" ng-controller="BikeDisplayController">
     <div class="panel panel-warning">
       <div class="panel-heading">
-        <h3 class="panel-title" style="display:inline-block">Bike Stock</h3>
-        <div style="display:inline-block; float:right">
-          <input type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" value="Add New Bike" />
+        <h3 class="panel-title newBikeFormTitle">Bike Stock</h3>
+        <div class="newBikeBtnDiv">
+          <input type="button" class="modalBtn btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" onclick="clearBikeForm()" value="Add New Bike" />
         </div>
       </div>
       <div class="panel-body">
@@ -26,12 +26,12 @@
             <td>{{bike.id}}</td>
             <td>{{bike.model}}</td>
             <td>{{bike.description}}</td>
-            <td>{{bike.bikeType}}</td>
-            <td>{{bike.qoh}}</td>
+            <td>{{ bikeTypes[bike.bikeTypeId -1].description }}</td>
+            <td>{{bike.quantityOnHand}}</td>
             <td>{{bike.price}}</td>
             <td>
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button value="{{bike.id}}" ng-click="UpdateBike($event)" style="border-right: 1px solid black" type="button" class="btn btn-secondary btn-sm">Edit</button>
+                <button value="{{bike.id}}" ng-click="GetBike($event)" style="border-right: 1px solid black" type="button" class="btn btn-secondary btn-sm">Edit</button>
                 <button value="{{bike.id}}" ng-click="DeleteBike($event)" style="border-left: 1px solid black" type="button" class="btn btn-secondary btn-sm">Delete</button>
               </div>
             </td>
@@ -40,29 +40,26 @@
       </div>
     </div>
   </div>
-  <!--iv class="col-md-4">
-    <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Add A Bike</button>
-  </-->
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content" ng-controller="BikeController">
-        <form ng-submit="AddBike()">
+        <form ng-submit="SaveBike($event)">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Bike Form</h3>
+            <h3 class="modal-title" id="exampleModalLabel" style="display:inline-block">Bike Form</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <table>
+          <div class="modal-body _bikeForm">
+            <table class="newBikeTable" style="margin:auto">
               <tr>
                 <td>
                   <label>Bike Model</label>
                 </td>
                 <td>
-                  <input type="text" ng-model="bike.Model" />
+                  <input type="text" class="_bikeModel" ng-model="bike.Model" />
                 </td>
               </tr>
               <tr>
@@ -70,7 +67,10 @@
                   <label>Type</label>
                 </td>
                 <td>
-                  <input type="text" ng-model="bike.BikeType" />
+                  <select class="_type" ng-model="bike.BikeTypeId">
+                    <option value="">Please Select</option>
+                    <option *ngFor="let type of bikeTypes" value="{{type.id}}">{{type.description}}</option>
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -78,7 +78,7 @@
                   <label>Cost</label>
                 </td>
                 <td>
-                  <input type="text" ng-model="bike.Price" />
+                  <input type="text" class="_price" ng-model="bike.Price" />
                 </td>
               </tr>
               <tr>
@@ -86,7 +86,8 @@
                   <label>Description</label>
                 </td>
                 <td>
-                  <input type="text" ng-model="bike.Description" />
+                  <!--<input type="text" class="_description" ng-model="bike.Description" />-->
+                  <textarea class="_description" ng-model="bike.Description"></textarea>
                 </td>
               </tr>
               <tr>
@@ -94,10 +95,11 @@
                   <label>Quantity on Hand</label>
                 </td>
                 <td>
-                  <input type="text" ng-model="bike.Qoh" />
+                  <input type="text" class="_qoh" ng-model="bike.QuantityOnHand" />
                 </td>
               </tr>
             </table>
+            <input type="hidden" class="_bikeId" ng-model="bike.Id" />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

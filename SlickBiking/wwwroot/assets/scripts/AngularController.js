@@ -13,10 +13,10 @@ angular.module("bikeApp", ['ngRoute'])
     fac.SaveBikeAction = function (bike, id) {
       alert("save called");
       $http.post("/api/Bike/SaveBike?id=" + id, bike).then(function successCallback(response) {
-        alert("Saved successfully!");
+        alert("success");
         $window.location.reload();
       }, function errorCallback(response) {
-        alert("Failed to save bike!");
+        alert("fail");
       });
     }
 
@@ -70,8 +70,8 @@ function poplateBikeForm(bike) {
   bikeForm.find("._qoh").val(bike.quantityOnHand);
   bikeForm.find("._qoh").trigger("input");
 
-  bikeForm.find("._type").val(bike.bikeTypeId);
-  bikeForm.find("._type").trigger("select");
+  bikeForm.find("._type").val(bike.bikeType);
+  bikeForm.find("._type").trigger("input");
 
   bikeForm.find("._bikeId").val(bike.id);
   bikeForm.find("._bikeId").trigger("input");

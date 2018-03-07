@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SlickBiking.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace SlickBiking
 {
@@ -24,7 +26,9 @@ namespace SlickBiking
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+          var connection = @"Server=den1.mssql5.gear.host;Database=slickbikes;User id=slickbikes;Password=Bw8WI1_9!rXH;ConnectRetryCount=0";
+          services.AddDbContext<slickbikesContext>(options => options.UseSqlServer(connection));
+          services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
