@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace SlickBiking.Model
 {
-    public partial class slickbikesContext : DbContext
-    {
-        public virtual DbSet<Bikes> Bikes { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<BikeTypes> BikeTypes { get; set; }
+  public partial class slickbikesContext : DbContext
+  {
+    public virtual DbSet<Bikes> Bikes { get; set; }
+    public virtual DbSet<Users> Users { get; set; }
+    public virtual DbSet<BikeTypes> BikeTypes { get; set; }
 
     //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //        {
@@ -24,20 +24,20 @@ namespace SlickBiking.Model
     { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<BikeTypes>(entity =>
-            {
-              entity.ToTable("biketypes");
+    {
+      modelBuilder.Entity<BikeTypes>(entity =>
+      {
+        entity.ToTable("biketypes");
 
-              entity.Property(e => e.Id).HasColumnName("id");
+        //entity.HasKey(p => new { p.Id });
+        entity.Property(e => e.Id).HasColumnName("id");
 
-              entity.Property(e => e.Description)
-                  .HasColumnName("description")
-                  .HasMaxLength(128)
-                  .IsUnicode(false);
-            });
+        entity.Property(e => e.Description)
+            .HasColumnName("description")
+            .HasMaxLength(128)
+            .IsUnicode(false);
+      });
 
-      //modelBuilder.Entity<Bikes>().ToTable("bikes");
       modelBuilder.Entity<Bikes>(entity =>
       {
         entity.ToTable("bikes");
@@ -47,12 +47,13 @@ namespace SlickBiking.Model
         entity.Property(e => e.BikeTypeId)
             .HasColumnName("bike_type_id");
 
-              //entity.OwnsOne(e => e.BikeType);
+        //entity.OwnsOne(e => e.BikeType).ToTable("biketypes")
+        //    .HasForeignKey(e => e.Id);
 
-              entity.Property(e => e.Description)
-              .HasColumnName("description")
-              .HasMaxLength(255)
-              .IsUnicode(false);
+        entity.Property(e => e.Description)
+        .HasColumnName("description")
+        .HasMaxLength(255)
+        .IsUnicode(false);
 
         entity.Property(e => e.Model)
                   .HasColumnName("model")
@@ -68,31 +69,31 @@ namespace SlickBiking.Model
 
       modelBuilder.Entity<Users>(entity =>
             {
-                entity.ToTable("users");
+              entity.ToTable("users");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+              entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.FirstName)
-                    .HasColumnName("first_name")
-                    .HasMaxLength(128)
-                    .IsUnicode(false);
+              entity.Property(e => e.FirstName)
+                  .HasColumnName("first_name")
+                  .HasMaxLength(128)
+                  .IsUnicode(false);
 
-                entity.Property(e => e.LastName)
-                    .HasColumnName("last_name")
-                    .HasMaxLength(128)
-                    .IsUnicode(false);
+              entity.Property(e => e.LastName)
+                  .HasColumnName("last_name")
+                  .HasMaxLength(128)
+                  .IsUnicode(false);
 
-                entity.Property(e => e.Password)
-                    .HasColumnName("password")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+              entity.Property(e => e.Password)
+                  .HasColumnName("password")
+                  .HasMaxLength(255)
+                  .IsUnicode(false);
 
-                entity.Property(e => e.Username)
-                    .HasColumnName("username")
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+              entity.Property(e => e.Username)
+                  .HasColumnName("username")
+                  .HasMaxLength(255)
+                  .IsUnicode(false);
             });
 
-        }
     }
+  }
 }

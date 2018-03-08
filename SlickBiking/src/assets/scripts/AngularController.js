@@ -6,12 +6,14 @@ angular.module("bikeApp", ['ngRoute'])
       var id = $(bikeIdInput).val();
       BikeService.SaveBikeAction($scope.bike, id);
     }
+    $scope.disableForm = function () { angularBikeForm.$invalid = true; }
+    $scope.enableForm = function () { angularBikeForm.$invalid = false; }
+    $scope.isEnable = function () { alert($scope.bike.model); }
   })
-  .factory("BikeService", ['$http', function ($http, $window) {
+  .factory("BikeService", ['$http', '$window', function ($http, $window) {
     var fac = {};
 
     fac.SaveBikeAction = function (bike, id) {
-      alert("save called");
       $http.post("/api/Bike/SaveBike?id=" + id, bike).then(function successCallback(response) {
         alert("Saved successfully!");
         $window.location.reload();
@@ -33,13 +35,16 @@ angular.module("bikeApp", ['ngRoute'])
     }
     $scope.GetBike = function ($event) {
       var id = $($event.target).val();
+      
       BikeActionService.GetBikeAction(id).then(
         function successCallback(response) {
           var bike = response.data;
           poplateBikeForm(bike);
+          disableBtn();
         },
         function errorCallback() { alert("Failed to retrieve bike information"); });
     }
+
   })
   .factory("BikeActionService", ['$http', function ($http, $route) {
     var fac = {};
@@ -75,7 +80,20 @@ function poplateBikeForm(bike) {
 
   bikeForm.find("._bikeId").val(bike.id);
   bikeForm.find("._bikeId").trigger("input");
+
   $("#myModal").modal();
+}
+
+function disableBtn() {
+  var formControls = $("._bikeForm").find(".form-control");
+  var disable = false;
+  $(formControls).each(function () {
+    if ($(this).val() == "") {
+      disable = true
+    }
+  });
+
+  $('button[type="submit"]').attr("disabled", disable);
 }
 
 function clearBikeForm() {
