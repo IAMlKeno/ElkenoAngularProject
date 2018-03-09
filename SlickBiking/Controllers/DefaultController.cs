@@ -16,11 +16,7 @@ namespace SlickBiking.Controllers
       [HttpPost]
       public IActionResult AddBike([FromBody] Bike bike)
       {
-      //Bike bike = new Bike();
-      //  bike.Model = model;
-      //var formData = await request.ReadFormAsync() as IEnumerable<KeyValuePair<string, string[]>>;
         var x = Json(bike);
-        
         return x;
       }
 

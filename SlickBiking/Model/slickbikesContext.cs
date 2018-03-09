@@ -10,15 +10,6 @@ namespace SlickBiking.Model
     public virtual DbSet<Users> Users { get; set; }
     public virtual DbSet<BikeTypes> BikeTypes { get; set; }
 
-    //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //        {
-    //            if (!optionsBuilder.IsConfigured)
-    //            {
-    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-    //                optionsBuilder.UseSqlServer(@"Server=den1.mssql5.gear.host;Database=slickbikes;User id=slickbikes;Password=Bw8WI1_9!rXH;");
-    //            }
-    //        }
-
     public slickbikesContext(DbContextOptions<slickbikesContext> options)
       : base(options)
     { }
@@ -48,7 +39,7 @@ namespace SlickBiking.Model
             .HasColumnName("bike_type_id");
 
         //entity.OwnsOne(e => e.BikeType).ToTable("biketypes")
-        //    .HasForeignKey(e => e.Id);
+        //    .HasForeignKey(e => e.Id); // causes the biketype entity to return an error
 
         entity.Property(e => e.Description)
         .HasColumnName("description")

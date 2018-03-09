@@ -3,49 +3,7 @@
     <img src="../assets/images/slickbikeslogo.png" />
   </div>
 
-  <!--<div ng-view></div>-->
-  <h1>{{test}}</h1>
-  <!--<div ng-include="'/app/pages/biketable.html'" ng-init="GetBikes()"></div>-->
-
-  <div class="col-md-12" ng-view ng-app="bikeDisplayTable" ng-controller="BikeDisplayController">
-
-   <!-- <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title newBikeFormTitle">Bike Stock</h3>
-        <div class="newBikeBtnDiv">
-          <input type="button" class="modalBtn btn btn-primary btn-sm" data-toggle="modal"
-                 data-target="#myModal" onclick="clearBikeForm(); disableBtn()" value="Add New Bike" />
-        </div>
-      </div>
-      <div class="panel-body">
-        <table class="table table-striped">
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Bike Type</th>
-            <th>Quantity On Hand</th>
-            <th>Cost</th>
-            <th>Actions</th>
-          </tr>
-          <tr *ngFor="let bike of apiValues">
-            <td>{{bike.id}}</td>
-            <td>{{bike.model}}</td>
-            <td>{{bike.description}}</td>
-            <td>temp</td>
-            <td>{{bike.quantityOnHand}}</td>
-            <td>{{bike.price}}</td>
-            <td>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button value="{{bike.id}}" ng-click="GetBike($event)" style="border-right: 1px solid black" type="button" class="btn btn-secondary btn-sm">Edit</button>
-                <button value="{{bike.id}}" ng-click="DeleteBike($event)" style="border-left: 1px solid black" type="button" class="btn btn-secondary btn-sm">Delete</button>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>-->
-  </div>
+  <div class="col-md-12" ng-view ng-app="bikeDisplayTable" ng-controller="BikeDisplayController"></div>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,7 +61,7 @@
                   <label>Quantity on Hand</label>
                 </td>
                 <td>
-                  <input type="number" onchange="disableBtn()" class="_qoh form-control" min="0" data-number-to-fixed="2" ng-model="bike.QuantityOnHand" required />
+                  <input type="number" onchange="disableBtn()" class="_qoh form-control" min="0" data-number-to-fixed="0" ng-model="bike.QuantityOnHand" required />
                 </td>
               </tr>
             </table>

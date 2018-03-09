@@ -28,6 +28,10 @@ namespace SlickBiking.Controllers
       try
       {
         list = _context.Bikes.ToList();
+        for (int i = 0; i < list.Count; i++)
+        {
+          list[i].BikeType = _context.BikeTypes.Single(bt => bt.Id == list[i].BikeTypeId);
+        }
       }
       catch (Exception e)
       {

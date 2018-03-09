@@ -75,7 +75,7 @@ namespace SlickBiking.Controllers
     {
       try
       {
-        var bike = _context.Bikes.Single(s => s.Id == id);
+        Bikes bike = _context.Bikes.Single(s => s.Id == id);
         return Json(bike);
       }
       catch (Exception e)
@@ -83,8 +83,5 @@ namespace SlickBiking.Controllers
         return BadRequest("Failed to retrieve bike in data.");
       }
     }
-
-
-
   }
 }
