@@ -10,12 +10,19 @@ export class AppComponent implements OnInit {
   apiValues: string[] = [];
   bikeTypes: string[] = [];
   ngOnInit() {
-    this._httpService.get('/api/values/GetBikes').subscribe(values => {
-      this.apiValues = values.json() as string[];
-    });
+    //this._httpService.get('/api/values/GetBikes').subscribe(values => {
+    //  this.apiValues = values.json() as string[];
+    //});
+    //this.getBikes();
 
     this._httpService.get('/api/values/GetBikeTypes').subscribe(types => {
       this.bikeTypes = types.json() as string[];
+    });
+  }
+
+  getBikes() {
+    this._httpService.get('/api/values/GetBikes').subscribe(values => {
+      this.apiValues = values.json() as string[];
     });
   }
 }

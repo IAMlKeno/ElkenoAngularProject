@@ -66,7 +66,7 @@ namespace SlickBiking.Controllers
       {
         return BadRequest("Failed to remove bike.");
       }
-      return Ok();
+      return Ok("Delete Success");
     }
 
     [HttpGet]

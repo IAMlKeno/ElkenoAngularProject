@@ -6,17 +6,17 @@ angular.module("bikeApp", ['ngRoute'])
       var id = $(bikeIdInput).val();
       BikeService.SaveBikeAction($scope.bike, id);
     }
-    $scope.disableForm = function () { angularBikeForm.$invalid = true; }
-    $scope.enableForm = function () { angularBikeForm.$invalid = false; }
-    $scope.isEnable = function () { alert($scope.bike.model); }
+    
+    
   })
-  .factory("BikeService", ['$http', '$window', function ($http, $window) {
+  .factory("BikeService", ['$http', '$window', '$route', function ($http, $window, $route) {
     var fac = {};
 
     fac.SaveBikeAction = function (bike, id) {
       $http.post("/api/Bike/SaveBike?id=" + id, bike).then(function successCallback(response) {
         alert("Saved successfully!");
-        $window.location.reload();
+        $route.reload();
+        $("#myModal").modal('hide');
       }, function errorCallback(response) {
         alert("Failed to save bike!");
       });
@@ -30,7 +30,6 @@ angular.module("bikeApp", ['ngRoute'])
       if (isDelete) {
         var id = $($event.target).attr("value");
         BikeActionService.DeleteBikeAction(id);
-        $window.location.reload();
       }
     }
     $scope.GetBike = function ($event) {
@@ -44,20 +43,48 @@ angular.module("bikeApp", ['ngRoute'])
         },
         function errorCallback() { alert("Failed to retrieve bike information"); });
     }
+    $scope.GetBikes = function () {
+      BikeActionService.GetBikesAction().then(
+        function successCallback(response) {}
+      );
+    }
 
   })
-  .factory("BikeActionService", ['$http', function ($http, $route) {
+  .factory("BikeActionService", ['$http', '$route', function ($http, $route) {
     var fac = {};
 
     fac.DeleteBikeAction = function (id) {
-      $http.post("/api/Bike/DeleteBike", id);
+      $http.post("/api/Bike/DeleteBike", id).then(function successCallback() {
+        $route.reload();
+      });
     }
 
     fac.GetBikeAction = function (id) {
       return $http.get("/api/Bike/GetBike?id=" + id);
     }
 
+    fac.GetBikesAction = function () {
+      return $http.get("/api/values/GetBikes");
+    }
+
     return fac;
+  }])
+  .controller('bikeDisplayCtrl', function ($scope, bikes) {
+    $scope.bikes = bikes.data;
+  })
+  .config(['$routeProvider', function ($routeProvider) {
+    $routeProvider
+      .when("/cat", { template: "<h1>cats</h1>" })
+      .when("/bikes", {
+        templateUrl: "app/pages/biketable.html",
+        controller: "bikeDisplayCtrl",
+        resolve: {
+          bikes: function (BikeActionService) {
+            return BikeActionService.GetBikesAction();
+          }
+        }
+      })
+      
   }])
 
 function poplateBikeForm(bike) {
@@ -88,7 +115,7 @@ function disableBtn() {
   var formControls = $("._bikeForm").find(".form-control");
   var disable = false;
   $(formControls).each(function () {
-    if ($(this).val() == "") {
+    if ($(this).val() === "") {
       disable = true
     }
   });
