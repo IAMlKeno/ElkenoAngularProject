@@ -74,8 +74,7 @@ angular.module("bikeApp", ['ngRoute'])
   })
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-      .when("/cat", { template: "<h1>cats</h1>" })
-      .when("/bikes", {
+      .otherwise({
         templateUrl: "app/pages/biketable.html",
         controller: "bikeDisplayCtrl",
         resolve: {

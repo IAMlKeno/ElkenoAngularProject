@@ -23,7 +23,7 @@
                   <label>Bike Model</label>
                 </td>
                 <td>
-                  <input type="text" onchange="disableBtn()" class="_bikeModel form-control" ng-model="bike.Model" required />
+                  <input type="text" onkeyup="disableBtn()" class="_bikeModel form-control" ng-model="bike.Model" required />
                 </td>
               </tr>
               <tr>
@@ -31,7 +31,7 @@
                   <label>Type</label>
                 </td>
                 <td>
-                  <select onchange="disableBtn()" class="_type form-control" ng-model="bike.BikeTypeId" required>
+                  <select onkeyup="disableBtn()" class="_type form-control" ng-model="bike.BikeTypeId" required>
                     <option value="">Please Select</option>
                     <option *ngFor="let type of bikeTypes" value="{{type.id}}">{{type.description}}</option>
                   </select>
@@ -44,7 +44,7 @@
                 <td>
                   <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <input type="number" onchange="disableBtn()" class="_price form-control" min="0" step="0.50" data-number-to-fixed="2" ng-model="bike.Price" required />
+                    <input type="number" onkeyup="disableBtn()" class="_price form-control" min="0" step="0.50" data-number-to-fixed="2" ng-model="bike.Price" required />
                   </div>
                 </td>
               </tr>
@@ -53,7 +53,7 @@
                   <label>Description</label>
                 </td>
                 <td>
-                  <textarea onchange="disableBtn()" class="_description form-control" ng-model="bike.Description" required></textarea>
+                  <textarea onkeyup="disableBtn()" class="_description form-control" ng-model="bike.Description" required></textarea>
                 </td>
               </tr>
               <tr>
@@ -61,7 +61,7 @@
                   <label>Quantity on Hand</label>
                 </td>
                 <td>
-                  <input type="number" onchange="disableBtn()" class="_qoh form-control" min="0" data-number-to-fixed="0" ng-model="bike.QuantityOnHand" required />
+                  <input type="number" onkeyup="disableBtn()" class="_qoh form-control" min="0" data-number-to-fixed="0" ng-model="bike.QuantityOnHand" required />
                 </td>
               </tr>
             </table>
