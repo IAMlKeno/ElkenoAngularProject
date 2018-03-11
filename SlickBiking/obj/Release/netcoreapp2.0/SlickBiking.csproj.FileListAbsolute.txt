@@ -1,0 +1,11 @@
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\bin\Release\netcoreapp2.0\SlickBiking.deps.json
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\bin\Release\netcoreapp2.0\SlickBiking.runtimeconfig.json
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\bin\Release\netcoreapp2.0\SlickBiking.runtimeconfig.dev.json
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\bin\Release\netcoreapp2.0\SlickBiking.dll
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\bin\Release\netcoreapp2.0\SlickBiking.pdb
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\obj\Release\netcoreapp2.0\SlickBiking.csprojResolveAssemblyReference.cache
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\obj\Release\netcoreapp2.0\SlickBiking.csproj.CoreCompileInputs.cache
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\obj\Release\netcoreapp2.0\SlickBiking.AssemblyInfoInputs.cache
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\obj\Release\netcoreapp2.0\SlickBiking.AssemblyInfo.cs
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\obj\Release\netcoreapp2.0\SlickBiking.dll
+C:\Users\Elkeno\source\repos\SlickBiking\SlickBiking\obj\Release\netcoreapp2.0\SlickBiking.pdb
